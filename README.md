@@ -10,6 +10,8 @@ A comprehensive Java web application implementing a complete user authentication
 - **Input Validation**: Client and server-side validation for all forms
 - **Session Management**: Proper session handling and security
 - **Database Integration**: MySQL database with connection pooling
+- **Speckit Integration**: External authentication service integration
+- **Hybrid Authentication**: Local database with Speckit service fallback
 - **Responsive UI**: Modern, styled web interface with CSS
 
 ## 🏗️ Architecture
@@ -28,6 +30,11 @@ This application follows the **MVC (Model-View-Controller)** pattern:
 │   ├── LoginData.java             # Data model class
 │   ├── LoginDataServlet.java      # Main servlet controller
 │   ├── LoginDb.java               # Database operations
+│   ├── SpeckitLoginDb.java        # Speckit-integrated database operations
+│   ├── SpeckitServiceClient.java  # Speckit service client
+│   ├── SpeckitAuthResponse.java   # Speckit response model
+│   ├── SpeckitConfig.java         # Speckit configuration manager
+│   ├── SpeckitTestServlet.java    # Speckit testing servlet
 │   └── Verification.java          # Input validation utilities
 ├── WebContent/                     # Web application content
 │   ├── Login-form.jsp             # Login page
@@ -38,7 +45,8 @@ This application follows the **MVC (Model-View-Controller)** pattern:
 │   ├── *.css                      # Stylesheet files
 │   └── png/                       # Image assets
 ├── WEB-INF/
-│   └── web.xml                    # Web application configuration
+│   ├── web.xml                    # Web application configuration
+│   └── speckit-config.properties  # Speckit service configuration
 ├── META-INF/
 │   └── context.xml                # Database connection configuration
 ├── lib/                           # External JAR dependencies
@@ -53,6 +61,8 @@ This application follows the **MVC (Model-View-Controller)** pattern:
 - **Frontend**: HTML, CSS, JavaScript
 - **Libraries**: JSTL (JavaServer Pages Standard Tag Library)
 - **Connection Pooling**: Tomcat JDBC Connection Pool
+- **External Services**: Speckit Authentication Service
+- **HTTP Client**: Java HttpURLConnection
 
 ## 📋 Prerequisites
 
@@ -126,11 +136,15 @@ The following JAR files are included in the `lib/` directory:
 
 The `LoginDataServlet` handles the following commands:
 
-- `command=login` - User authentication
-- `command=update` - User registration
-- `command=check` - Username verification
-- `command=forgot` - Password reset
+- `command=login` - User authentication (with Speckit integration)
+- `command=update` - User registration (with Speckit integration)
+- `command=check` - Username verification (with Speckit integration)
+- `command=forgot` - Password reset (with Speckit integration)
 - `command=thanks` - Logout
+
+### Speckit Integration Endpoints
+
+- `/SpeckitTestServlet` - Speckit integration testing interface
 
 ## 🔒 Security Features
 

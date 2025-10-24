@@ -12,19 +12,17 @@ import javax.sql.DataSource;
 
 @WebServlet("/LoginDataServlet")
 public class LoginDataServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	@Resource(name="jdbc/login-webapp")
+	private static final long serialVer	@Resource(name="jdbc/login-webapp")
 	
 	private DataSource datasource;
-	LoginDb login;
-	Verification ver = new Verification();
+	SpeckitLoginDb login;
+	Verification ver = new Verification();new Verification();
 	
 	
 	@Override
-	public void init() throws ServletException {
-		super.init();
-		try {
-			login = new LoginDb(datasource);
+	public void init() throws ServletException 		try {
+			login = new SpeckitLoginDb(datasource);
+		}inDb(datasource);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
